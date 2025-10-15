@@ -1,28 +1,93 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - RedChat</title>
+    <title>Kuromi Messenger - Acesso</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
-    <div class="auth-container">
-        <h1>RedChat</h1>
-        <form action="chat.html" method="get"> <div class="input-group">
-                <label for="username">Usuário</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn-principal">Entrar</button>
+<body class="kuromi-bg">
+    <div class="container">
+        <h1 class="kuromi-title">Kuromi Messenger 🎀😈</h1>
+        <p class="kuromi-subtitle">Acesso ou Novo Registro</p>
+
+        <form id="auth-form">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="username" placeholder="Username (Apenas para Cadastro)">
+            <input type="password" id="password" placeholder="Senha" required>
+            
+            <button type="submit" id="auth-button" class="kuromi-btn">Fazer Login</button>
+            
+            <p class="toggle-text">
+                Não tem conta? 
+                <a href="#" id="toggle-auth">Clique para Cadastrar</a>
+            </p>
         </form>
-        <div class="link-alternativo">
-            <p>Não tem uma conta? <a href="registro.html">Registre-se</a></p>
-        </div>
+
+        <div id="message" class="kuromi-message"></div>
     </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const authForm = document.getElementById('auth-form');
+            const usernameInput = document.getElementById('username');
+            const authButton = document.getElementById('auth-button');
+            const toggleAuth = document.getElementById('toggle-auth');
+            const messageDiv = document.getElementById('message');
+            let isSignUp = false;
+
+            // Função para alternar entre Login e Cadastro
+            toggleAuth.addEventListener('click', (e) => {
+                e.preventDefault();
+                isSignUp = !isSignUp;
+                usernameInput.style.display = isSignUp ? 'block' : 'none';
+                authButton.textContent = isSignUp ? 'Registrar-se' : 'Fazer Login';
+                toggleAuth.textContent = isSignUp ? 'Clique para Login' : 'Clique para Cadastrar';
+                document.querySelector('.toggle-text').firstChild.nodeValue = isSignUp ? 'Já tem conta? ' : 'Não tem conta? ';
+            });
+
+            // Lógica de Submissão do Formulário
+            authForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                messageDiv.textContent = '';
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const username = usernameInput.value;
+
+                authButton.disabled = true;
+                authButton.textContent = 'Aguarde...';
+
+                let result;
+                if (isSignUp) {
+                    result = await signUpUser(email, password, username);
+                    if (result.success) {
+                        messageDiv.textContent = '✅ Sucesso! Confirme seu e-mail e faça login.';
+                        // Após cadastro, muda para login
+                        isSignUp = false;
+                        usernameInput.style.display = 'none';
+                        authButton.textContent = 'Fazer Login';
+                        toggleAuth.textContent = 'Clique para Cadastrar';
+                        document.querySelector('.toggle-text').firstChild.nodeValue = 'Não tem conta? ';
+                    } else {
+                        messageDiv.textContent = '❌ Erro: ' + result.error.message;
+                    }
+                } else {
+                    result = await signInUser(email, password);
+                    if (result.error) {
+                         messageDiv.textContent = '❌ Erro no login: ' + result.error.message;
+                    } 
+                    // Se sucesso, o signInUser já redireciona
+                }
+                
+                authButton.disabled = false;
+                if (!result.success) {
+                   authButton.textContent = isSignUp ? 'Registrar-se' : 'Fazer Login';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
