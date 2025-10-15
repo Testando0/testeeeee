@@ -1,0 +1,191 @@
+/* style.css */
+
+/* Paleta de Cores Kuromi */
+:root {
+    --color-dark: #1A1A2E; /* Roxo-escuro, quase preto */
+    --color-pink: #FF69B4; /* Rosa Choque / Deep Pink (Ação) */
+    --color-lavender: #DDA0DD; /* Lavanda (Detalhes) */
+    --color-white: #f0f0f0;
+    --color-text: var(--color-white);
+    --color-border: var(--color-pink);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif; /* Idealmente, use uma fonte gótica fofa */
+}
+
+/* Fundo */
+.kuromi-bg {
+    background-color: var(--color-dark);
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Títulos e Textos */
+.kuromi-title {
+    color: var(--color-pink);
+    font-size: 2.5em;
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 10px;
+}
+
+.kuromi-title-2 {
+    color: var(--color-lavender);
+    font-size: 1.5em;
+    border-bottom: 2px solid var(--color-lavender);
+    padding-bottom: 5px;
+    margin: 20px 0 10px;
+}
+
+.kuromi-subtitle {
+    color: var(--color-lavender);
+    margin-bottom: 20px;
+}
+
+/* Container de Login/Chat */
+.container {
+    background-color: #272740; /* Um tom mais claro que o fundo */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5); /* Sombra rosa Kuromi */
+    width: 100%;
+    max-width: 400px;
+}
+
+.chat-container {
+    max-width: 600px;
+}
+
+/* Formulário e Inputs */
+#auth-form input, 
+.kuromi-input-search {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid var(--color-lavender);
+    border-radius: 8px;
+    background-color: #33334d;
+    color: var(--color-white);
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#auth-form input:focus,
+.kuromi-input-search:focus {
+    border-color: var(--color-pink);
+}
+
+#username {
+    display: none; /* Escondido por padrão */
+}
+
+/* Botões Estilo Kuromi */
+.kuromi-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-pink);
+    color: var(--color-dark);
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 4px 0 #9e366d; /* Efeito 3D */
+    margin-top: 10px;
+}
+
+.kuromi-btn:hover {
+    background-color: #ff85c1;
+}
+
+.kuromi-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #9e366d;
+}
+
+.logout-btn {
+    width: auto;
+    padding: 8px 15px;
+    margin: 0;
+    box-shadow: none;
+    background-color: #583c79;
+}
+
+.logout-btn:hover {
+    background-color: #7957a0;
+}
+
+/* Mensagens de Status */
+.kuromi-message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: var(--color-pink);
+    border: 1px solid var(--color-pink);
+}
+
+/* Toggle Link */
+.toggle-text {
+    text-align: center;
+    margin-top: 15px;
+}
+.toggle-text a {
+    color: var(--color-pink);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Header e Pesquisa */
+.kuromi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-pink);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+#current-user-info {
+    font-weight: bold;
+    color: var(--color-pink);
+}
+
+.search-box {
+    margin-bottom: 20px;
+}
+
+/* Resultados da Pesquisa */
+.results-list {
+    min-height: 50px;
+}
+
+.user-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #33334d;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 5px solid var(--color-lavender);
+}
+
+.user-card span {
+    font-weight: bold;
+}
+
+.start-chat-btn {
+    width: auto;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    margin: 0;
+}
