@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedChat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body id="chat-body">
+
+    <div class="chat-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>RedChat</h2>
+                <button id="logout-button" title="Sair" style="background: none; border: none; color: #aaa; font-size: 1.2em; cursor: pointer;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+            <div class="user-search">
+                <input type="search" id="search-input" placeholder="Pesquisar usuários...">
+            </div>
+            <div id="contact-list" class="contact-list">
+                <p style="text-align: center; padding: 20px; color: #aaa;">Carregando contatos...</p>
+            </div>
+        </aside>
+
+        <main class="chat-window">
+            <header id="chat-header" class="chat-header" style="display: none;"> <div class="contact-avatar"></div>
+                <div class="contact-info">
+                    <div class="name"></div>
+                    <div class="status"></div>
+                </div>
+            </header>
+
+            <div id="message-area" class="message-area">
+                <div style="margin: auto; text-align: center; color: #aaa;">
+                    <h3>Bem-vindo ao RedChat!</h3>
+                    <p>Selecione um contato na lista para começar a conversar.</p>
+                </div>
+            </div>
+
+            <form id="chat-form" class="chat-input" style="display: none;"> <input type="text" id="message-input" placeholder="Digite sua mensagem..." autocomplete="off">
+                <button type="submit">Enviar</button>
+            </form>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
